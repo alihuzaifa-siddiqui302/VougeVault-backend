@@ -1,0 +1,68 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  sendgrid:
+    api-key: ${SENDGRID_API_KEY}
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+      ssl:
+        enabled: ${REDIS_SSL:true}
+      timeout: 3000ms
+      connect-timeout: 3000ms
+      client-type: lettuce
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 2
+          max-wait: 2000ms
+logging:
+  level:
+    root: WARN
+    com.ecommerce.VougeVault: INFO
+    org.hibernate.SQL: WARN
+    org.springframework.security: WARN
+
+app:
+  cors:
+    allowed-origins: ${FRONTEND_URL}
+  file-upload:
+    upload-dir: ${UPLOAD_DIR:/opt/vougevault/uploads/products}
+    max-file-size: 10485760  # 10MB
+    allowed-mime-types: "image/jpeg,image/png,image/webp,image/gif"
+  api-base-url: ${API_BASE_URL}
+  email:
+    from: ${APP_EMAIL_FROM}
+    from-name: ${APP_EMAIL_FROM_NAME:VogueVault}
+
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:86400000}
+
+stripe:
+  secret-key: ${STRIPE_SECRET_KEY}
+  publishable-key: ${STRIPE_PUBLISHABLE_KEY}
+  webhook-secret: ${STRIPE_WEBHOOK_SECRET}
+
+sendgrid:
+  api-key: ${SENDGRID_API_KEY}
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false
+#google:
+#  maps:
+#    api-key: ${GOOGLE_MAPS_PROD_KEY}

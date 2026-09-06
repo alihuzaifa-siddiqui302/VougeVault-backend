@@ -1,0 +1,59 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/ecommerce}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  sendgrid:
+    api-key: ${SENDGRID_API_KEY:mock}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 2000ms
+
+logging:
+  level:
+    root: INFO
+    com.ecommerce.VougeVault: DEBUG
+    org.hibernate.SQL: DEBUG
+
+app:
+  cors:
+    allowed-origins: ${FRONTEND_URL:http://localhost:3000,http://localhost:5173}
+  file-upload:
+    upload-dir: ${UPLOAD_DIR:uploads/products}
+    max-file-size: 5242880  # 5MB
+    allowed-mime-types: "image/jpeg,image/png,image/webp,image/gif"
+  api-base-url: ${API_BASE_URL:http://localhost:8080}
+  email:
+    from: ${APP_EMAIL_FROM:noreply@vougevault.com}
+    from-name: ${APP_EMAIL_FROM_NAME:VogueVault Dev}
+
+jwt:
+  secret: ${JWT_SECRET:dev-secret-key-not-for-production-use-only-local-testing-1234567890}
+  expiration: 86400000
+
+stripe:
+  secret-key: ${STRIPE_SECRET_KEY:mock_stripe_secret}
+  publishable-key: ${STRIPE_PUBLISHABLE_KEY:mock_stripe_publishable}
+  webhook-secret: ${STRIPE_WEBHOOK_SECRET:mock_stripe_webhook}
+
+sendgrid:
+  api-key: ${SENDGRID_API_KEY:mock}
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+  api-docs:
+    path: /v3/api-docs
+#google:
+#  maps:
+#    api-key: ${GOOGLE_MAPS_DEV_KEY:placeholder_key}

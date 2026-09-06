@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  flyway:
+    enabled: false
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration
+      - org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchRestClientAutoConfiguration
+
+jwt:
+  secret: test-secret
+  expiration: 86400000
+
+stripe:
+  secret-key: test-stripe-secret
+  publishable-key: test-stripe-pub
+  webhook-secret: test-stripe-webhook
+
+email:
+  from: test@example.com
+  from-name: TestSender
+
+sendgrid:
+  api-key: test-sendgrid-key
+

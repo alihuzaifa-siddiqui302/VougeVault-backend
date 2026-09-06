@@ -1,0 +1,7 @@
+CREATE TABLE wishlist (
+    id BIGSERIAL PRIMARY KEY,
+    customer_id BIGINT NOT NULL UNIQUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_wishlist_customer FOREIGN KEY (customer_id) REFERENCES users(id)
+);
