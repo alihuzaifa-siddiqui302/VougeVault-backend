@@ -1,6 +1,25 @@
-
-
 services:
+  backend:
+    build: .
+    container_name: vougevault-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DATABASE_URL: jdbc:postgresql://postgres:5432/ecommerce
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      SPRING_MAIL_HOST: mailpit
+      SPRING_MAIL_PORT: 1025
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
   postgres:
     image: postgres:16-alpine
     container_name: vougevault-postgres

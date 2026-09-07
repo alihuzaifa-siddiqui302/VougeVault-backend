@@ -1,4 +1,3 @@
-#application.yml
 spring:
   application:
     name: VougeVault
@@ -28,20 +27,21 @@ server:
     include-binding-errors: always
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: ${JWT_SECRET:dev-secret-key-not-for-production-use-only-local-testing-1234567890}
   expiration: 86400000
 
 app:
   cors:
     allowed-methods: GET,POST,PUT,PATCH,DELETE,OPTIONS
     allowed-headers: "*"
+  email:
+    from: ${APP_EMAIL_FROM:noreply@vougevault.com}
+    from-name: ${APP_EMAIL_FROM_NAME:VougeVault}
 
 stripe:
-  secret-key: ${STRIPE_SECRET_KEY}
-  publishable-key: ${STRIPE_PUBLISHABLE_KEY}
-  webhook-secret: ${STRIPE_WEBHOOK_SECRET}
+  secret-key: ${STRIPE_SECRET_KEY:mock_stripe_secret}
+  publishable-key: ${STRIPE_PUBLISHABLE_KEY:mock_stripe_publishable}
+  webhook-secret: ${STRIPE_WEBHOOK_SECRET:mock_stripe_webhook}
 
-email:
-  from: noreply@vougelvault.com
-  from-name: VougeVault
-
+sendgrid:
+  api-key: ${SENDGRID_API_KEY:mock}
